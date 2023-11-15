@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+</head>
+<body style="background-color: rgb(27, 27, 27); color: #fff;">
+    <pre>
+        0	UNSENT	    Client has been created. open() not called yet.
+        1	OPENED	    open() has been called.
+        2	HEADERS_RECEIVED    send() has been called, and headers and status are available.
+        3	LOADING	    Downloading; responseText holds partial data.
+        4	DONE	    The operation is complete.
+    </pre>
+
+    <button id="fetchBtn" type="button">Fetch Data</button>
+    <button id="bkupBtn" type="button">Backup button</button>
+
+</body>
+<script>
+    const reqURL = 'https://api.github.com/users/adarshjha-1';
+    
+    const fetchBtn = document.querySelector('#fetchBtn');
+    const backupBtn = document.querySelector('#bkupBtn');
+
+    fetchBtn.addEventListener('click', buttonClickHandler)
+
+    function buttonClickHandler(){
+        console.log("you CLick the button");
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', reqURL, true);
+        xhr.onprogress = function() {
+            console.log("On progress");
+        }
+        xhr.onload = function() {
+            console.log(this.responseText);
+        }
+
+        xhr.send();
+    }
+</script>
+</html>
